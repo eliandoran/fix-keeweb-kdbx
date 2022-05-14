@@ -35,12 +35,14 @@ function askForExport {
 function patchXml {
     file=$1
     
-    function patchRemove {
-        sed -i "s/$1//g" $file
+    function removeSelfClosingElement {
+        sed -i "s/<$1\s*\/>//g" $file
     }
 
-    patchRemove "<EnableSearching\s*\/>"
-    patchRemove "<EnableAutoType\s*\/>"
+    removeSelfClosingElement "EnableSearching"
+    removeSelfClosingElement "EnableAutoType"
+    removeSelfClosingElement "MaintenanceHistoryDays"
+    removeSelfClosingElement "MasterKeyChange\w*"
 }
 
 function importXml {
