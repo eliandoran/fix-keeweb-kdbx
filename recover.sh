@@ -46,12 +46,13 @@ function patchXml {
 }
 
 function importXml {
-    keepassxc-cli import $1 $2
+    keepassxc-cli import "$1" "$2"
+    echo "The XML was exported back to a KDBX to $2"
 }
 
 if [ $# -eq 1 ]
 then
     patchXml "$1"
-    importXml "$1" "$1.xml"
+    importXml "$1" "$1.kdbx"
     exit 0
 fi
