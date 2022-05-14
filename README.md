@@ -8,6 +8,14 @@ Invalid EnableSearching value
 
 This is a tool to "repair" the .kdbx created by KeeWeb so that it can be opened in KeePassXC.
 
+## :warning: Disclaimer
+
+> This tool is operating on your sensitive data such (e.g. your passwords). The author assumes no liability for any data loss that might result from using this script. Make sure to personally review the contents of the scripts you are running, to ensure that none of your data is at risk.
+
+To view the source code of this script, go to the following URL: https://github.com/eliandoran/fix-keeweb-kdbx/blob/master/recover.sh
+
+If you have any question or concerns regarding the implementation of the script, feel free to [open an issue](#reporting-issues).
+
 ## Prerequisites
 
 The "KeepassXC CLI" is required for parsing the .xml file of the "bad" database and creating a fresh .kdbx file. Without it, the tool will not work. If you are using Linux, it should already be available via your KeePassXC installation.
@@ -85,7 +93,7 @@ After making sure that the .xml files were added to the temporary directory, go 
 
 Afterwards, the tool will open each `.xml` file and try to fix its errors. After the file is patched, it will try to export it back to `.kdbx` so that it can be opened in KeePassXC. The name of the resulting .kdbx is going to be the same as the .xml file, plus the right extension (e.g. `db.xml` becomes `db.xml.kdbx`).
 
-At this point, the tool uses the KeePassXC CLI utility to export the .kdbx file. This means that you will have instant feedback to see if the file was successfully repaired. If you have errors at this step, please check the "Reporting issues" section below.
+At this point, the tool uses the KeePassXC CLI utility to export the .kdbx file. This means that you will have instant feedback to see if the file was successfully repaired. If you have errors at this step, please check the [Reporting issues](#reporting-issues) section.
 
 For each file a `.kdbx` file will be created, and each file can be password protected. For this, you will have to enter a password at each of these prompts:
 
