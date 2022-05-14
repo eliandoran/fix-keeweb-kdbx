@@ -16,6 +16,10 @@ To view the source code of this script, go to the following URL: https://github.
 
 If you have any question or concerns regarding the implementation of the script, feel free to [open an issue](#reporting-issues).
 
+## How it works
+
+If you are interested in how the tool manages to fix the files, see the following file: [How-it-works.md](./How-it-works.md).
+
 ## Prerequisites
 
 The "KeepassXC CLI" is required for parsing the .xml file of the "bad" database and creating a fresh .kdbx file. Without it, the tool will not work. If you are using Linux, it should already be available via your KeePassXC installation.
