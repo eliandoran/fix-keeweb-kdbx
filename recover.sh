@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
 
-function buildTempDir {
-    dir=`mktemp -d`
-
-    function cleanup {
-        rm -rf "$dir"
-    }
-
-    if [ ! -e "$dir" ]; then
-        >&2 echo "Unable to create a temporary directory to store the XML files."
-        exit 1
-    fi
-
-    trap cleanup EXIT
-}
-
 function askForExport {
     #
     # Ask the user to add the XML files.
@@ -36,7 +21,7 @@ function patchXml {
     file=$1
     
     function removeSelfClosingElement {
-        sed -i "s/<$1\s*\/>//g" $file
+        sed -i "s/<$1\s*\/>//g" "$file"
     }
 
     removeSelfClosingElement "EnableSearching"
@@ -50,9 +35,47 @@ function importXml {
     echo "The XML was exported back to a KDBX to $2"
 }
 
+function patchAll {
+    # Patch all files in the temp directory.
+    for file in *.xml
+    do
+        [ -e "$file" ] || continue
+        patchXml "$file"
+        importXml "$file" "$file.kdbx"
+    done
+
+    rm *.xml
+
+    echo
+    echo "The files have been successfully fixed. Move the KDBX files to somewhere safe and press ENTER."
+    echo "The temporary directory '$dir' will be removed." 
+    read -n 1 
+}
+
+# Advanced usage
 if [ $# -eq 1 ]
 then
     patchXml "$1"
     importXml "$1" "$1.kdbx"
     exit 0
 fi
+
+# Basic usage
+# Create a temporary directory.
+dir=`mktemp -d`
+
+function cleanup {
+    echo "Removing '$dir'"
+    rm -rf "$dir"
+}
+
+if [ ! -e "$dir" ]; then
+    >&2 echo "Unable to create a temporary directory to store the XML files."
+    exit 1
+fi
+
+trap cleanup EXIT
+
+cd "$dir"
+askForExport
+patchAll
