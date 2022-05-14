@@ -43,8 +43,13 @@ function patchXml {
     patchRemove "<EnableAutoType\s*\/>"
 }
 
+function importXml {
+    keepassxc-cli import $1 $2
+}
+
 if [ $# -eq 1 ]
 then
     patchXml "$1"
+    importXml "$1" "$1.xml"
     exit 0
 fi
