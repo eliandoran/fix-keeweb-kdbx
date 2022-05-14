@@ -33,7 +33,14 @@ function askForExport {
 }
 
 function patchXml {
+    file=$1
     
+    function patchRemove {
+        sed -i "s/$1//g" $file
+    }
+
+    patchRemove "<EnableSearching\s*\/>"
+    patchRemove "<EnableAutoType\s*\/>"
 }
 
 if [ $# -eq 1 ]
