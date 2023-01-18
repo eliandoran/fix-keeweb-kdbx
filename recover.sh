@@ -32,7 +32,7 @@ function patchXml {
 
 function importXml {
     echo "Exporting $1 to KDBX: $2"
-    keepassxc-cli import "$1" "$2" && echo "OK"
+    keepassxc-cli import -p "$1" "$2" && echo "OK"
 }
 
 function patchAll {
