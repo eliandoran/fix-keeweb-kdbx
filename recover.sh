@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+if [[ "$(uname)" == "Darwin" ]]; then
+    # different command for macos
+    cli_path="/Applications/KeePassXC.app/Contents/MacOS/keepassxc-cli"
+    sed_cmd="sed -i ''"
+else
+    cli_path="keepassxc-cli"
+    sed_cmd="sed -i"
+fi
+
+
 function askForExport {
     #
     # Ask the user to add the XML files.
@@ -21,7 +31,8 @@ function patchXml {
     file=$1
     
     function removeSelfClosingElement {
-        sed -i "s/<$1\s*\/>//g" "$file"
+        $sed_cmd "s/<$1\s*\/>//g" "$file"
+
     }
 
     removeSelfClosingElement "EnableSearching"
@@ -32,7 +43,7 @@ function patchXml {
 
 function importXml {
     echo "Exporting $1 to KDBX: $2"
-    keepassxc-cli import -p "$1" "$2" && echo "OK"
+    $cli_path import -p "$1" "$2" && echo "OK"
 }
 
 function patchAll {
