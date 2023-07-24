@@ -10,7 +10,7 @@ This is a tool to "repair" the .kdbx created by KeeWeb so that it can be opened 
 
 ## :warning: Disclaimer
 
-> This tool is operating on your sensitive data such (e.g. your passwords). The author assumes no liability for any data loss that might result from using this script. Make sure to personally review the contents of the scripts you are running, to ensure that none of your data is at risk.
+> This tool is operating on your sensitive data such as your user names and passwords. The author assumes no liability for any data loss that might result from using this script. Make sure to personally review the contents of the scripts you are running, to ensure that none of your data is at risk.
 
 To view the source code of this script, go to the following URL: https://github.com/eliandoran/fix-keeweb-kdbx/blob/master/recover.sh
 
@@ -20,13 +20,18 @@ If you have any question or concerns regarding the implementation of the script,
 
 If you are interested in how the tool manages to fix the files, see the following file: [How-it-works.md](./How-it-works.md).
 
+## Supported platforms
+
+* GNU/Linux, should work on most distributions provided `keepassxc-cli` is installed and available in the system path (see below).
+* macOS, provided the official KeePassXC application is installed in `/Applications/KeePassXC.app`.
+
 ## Prerequisites
 
 The "KeepassXC CLI" is required for parsing the .xml file of the "bad" database and creating a fresh .kdbx file. Without it, the tool will not work. If you are using Linux, it should already be available via your KeePassXC installation.
 
 To test if the tool is available, type the following command in your favourite terminal:
 
-```
+```sh
 keepassxc-cli
 ````
 
@@ -36,14 +41,14 @@ Running this command should output some information about the KeepassXC CLI. If 
 
 First, clone the repository and make the script executable. This should only be done once.
 
-```
+```sh
 git clone https://github.com/eliandoran/fix-keeweb-kdbx.git
 cd fix-keeweb-kdbx
 chmod +x recover.sh
 ```
 
 Afterwards, the tool can simply be run via:
-```
+```sh
 ./recover.sh
 ```
 
@@ -60,7 +65,7 @@ When the tool is first started, it will create a temporary directory for you to 
 
 Run the tool by going to the directory where you cloned the repository. Open a terminal in that directory and run the following command:
 
-```
+```sh
 ./recovery.sh
 ```
 
